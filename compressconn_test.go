@@ -138,7 +138,7 @@ func TestAEADS2ConnGo(t *testing.T) {
 				panic(err)
 			}
 
-			r := aeadconn.NewAEADConn(seed, chunkSize, conn, aead1)
+			r := aeadconn.NewAEADCompressConn(seed, chunkSize, conn, aead1)
 			buf := make([]byte, 2)
 			dst := make([]byte, 0)
 			for {
@@ -174,7 +174,7 @@ func TestAEADS2ConnGo(t *testing.T) {
 			panic(err)
 		}
 
-		w := aeadconn.NewAEADConn(seed, chunkSize, conn, aead2)
+		w := aeadconn.NewAEADCompressConn(seed, chunkSize, conn, aead2)
 		w.Write(rawMessage)
 		w.Close()
 	}()
