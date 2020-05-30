@@ -1,11 +1,11 @@
 package aeadconn
 
 import (
+	"compress/gzip"
 	"crypto/cipher"
 	"io"
 	"net"
 
-	"github.com/klauspost/compress/s2"
 	stream "github.com/maoxs2/go-aead-iostream"
 )
 
@@ -16,8 +16,8 @@ type AEADCompressConn struct {
 	compressW io.Writer
 	compressR io.Reader
 
-	pipeR *io.PipeReader
-	pipeW *io.PipeWriter
+	writeR *io.PipeReader
+	readW  *io.PipeWriter
 
 	cryptoW io.Writer
 	cryptoR io.Reader
@@ -25,20 +25,31 @@ type AEADCompressConn struct {
 
 // raw <--> 1. Encode <--> 2. Encrypt(Write) <-ciphertext-> 1. Decrypt(Read) <--> 2. Decode <--> raw
 func NewAEADCompressConn(seed []byte, chunkSize int, conn net.Conn, aead cipher.AEAD) *AEADCompressConn {
-	pipeR, pipeW := io.Pipe()
+	writeR, writeW := io.Pipe()
+	readR, readW := io.Pipe()
 
-	return &AEADCompressConn{
+	compressR, err := gzip.NewReader(readR)
+	if err != nil {
+		panic(err)
+	}
+
+	cc := &AEADCompressConn{
 		Conn: conn,
 
-		compressW: s2.NewWriter(pipeW),
-		compressR: s2.NewReader(pipeR),
+		compressW: gzip.NewWriter(writeW),
+		compressR: compressR,
 
-		pipeR: pipeR,
-		pipeW: pipeW,
+		writeR: writeR,
+		readW:  readW,
 
 		cryptoW: stream.NewStreamWriteCloser(seed, chunkSize, conn, aead),
 		cryptoR: stream.NewStreamReader(seed, chunkSize, conn, aead),
 	}
+
+	go io.Copy(cc.cryptoW, cc.writeR)
+	go io.Copy(cc.readW, cc.cryptoR)
+
+	return cc
 }
 
 func (cc *AEADCompressConn) Close() error {
@@ -47,11 +58,9 @@ func (cc *AEADCompressConn) Close() error {
 
 func (cc *AEADCompressConn) Write(b []byte) (i int, err error) {
 	i, err = cc.compressW.Write(b)
-	io.Copy(cc.cryptoW, cc.pipeR)
 	return
 }
 
 func (cc *AEADCompressConn) Read(b []byte) (int, error) {
-	io.Copy(cc.pipeW, cc.cryptoR)
 	return cc.compressR.Read(b)
 }
