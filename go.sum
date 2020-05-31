@@ -1,4 +1,4 @@
 github.com/klauspost/compress v1.10.6 h1:SP6zavvTG3YjOosWePXFDlExpKIWMTO4SE/Y8MZB2vI=
 github.com/klauspost/compress v1.10.6/go.mod h1:aoV0uJVorq1K+umq18yTdKaF57EivdYsUV+/s2qKfXs=
-github.com/maoxs2/go-aead-iostream v0.0.0-20200530155830-0352040d4af5 h1:+zq7MB2n4oCCOj/beQpxyhsEmD97TdpGw28A2CzQDrE=
-github.com/maoxs2/go-aead-iostream v0.0.0-20200530155830-0352040d4af5/go.mod h1:3G9/se/VKc9spV3x4vmKEAbxz5sI1aHwaihLlqibiiM=
+github.com/maoxs2/go-aead-iostream v0.0.0-20200531024629-ac4440c577a6 h1:OIGVXCaHfiZExLoYGZG16uzJGYoucUbryhN6Cv8DPqM=
+github.com/maoxs2/go-aead-iostream v0.0.0-20200531024629-ac4440c577a6/go.mod h1:3G9/se/VKc9spV3x4vmKEAbxz5sI1aHwaihLlqibiiM=
