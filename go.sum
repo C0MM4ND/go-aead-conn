@@ -1,4 +1,4 @@
 github.com/c0mm4nd/go-aead-iostream v0.0.0-20220422180338-8abec578659c h1:lqHp6p1XkCyLf80lYZnQj/GPt87vlla44yCs+/MwfCg=
 github.com/c0mm4nd/go-aead-iostream v0.0.0-20220422180338-8abec578659c/go.mod h1:49Wf/KTlWMVxR7jG83trjWNTTtfYaBfbtTQijI36dSA=
-github.com/klauspost/compress v1.10.6 h1:SP6zavvTG3YjOosWePXFDlExpKIWMTO4SE/Y8MZB2vI=
-github.com/klauspost/compress v1.10.6/go.mod h1:aoV0uJVorq1K+umq18yTdKaF57EivdYsUV+/s2qKfXs=
+github.com/klauspost/compress v1.15.1 h1:y9FcTHGyrebwfP0ZZqFiaxTaiDnUrGkJkI+f583BL1A=
+github.com/klauspost/compress v1.15.1/go.mod h1:/3/Vjq9QcHkK5uEr5lBEmyoZ1iFhe47etQ6QUkpK6sk=
