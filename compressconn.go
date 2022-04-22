@@ -5,8 +5,8 @@ import (
 	"io"
 	"net"
 
+	stream "github.com/c0mm4nd/go-aead-iostream"
 	snappy "github.com/klauspost/compress/snappy"
-	stream "github.com/maoxs2/go-aead-iostream"
 )
 
 // AEADCompressConn uses https://github.com/klauspost/compress/tree/master/s2#s2-compression to compress the data

@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	aeadconn "github.com/maoxs2/go-aead-conn"
+	aeadconn "github.com/c0mm4nd/go-aead-conn"
 )
 
 func TestAEADConnCome(t *testing.T) {

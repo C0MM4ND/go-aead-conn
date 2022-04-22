@@ -4,7 +4,7 @@ import (
 	"crypto/cipher"
 	"net"
 
-	stream "github.com/maoxs2/go-aead-iostream"
+	stream "github.com/c0mm4nd/go-aead-iostream"
 )
 
 type AEADConn struct {
